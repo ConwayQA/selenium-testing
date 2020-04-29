@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -38,12 +40,12 @@ public class AppTest
 //        sleep(2000);
 //        WebElement imagesLink = driver.findElement(By.className("NZmxZe"));
 //        assertTrue(imagesLink.isDisplayed());
-//
-//        imagesLink.getLocation();
-//        imagesLink.getSize();
-//        imagesLink.getText();
-//        imagesLink.isDisplayed();
-//        imagesLink.isSelected();
+
+//     //    imagesLink.getLocation();
+//     //    imagesLink.getSize();
+//     //    imagesLink.getText();
+//     //    imagesLink.isDisplayed();
+//     //    imagesLink.isSelected();
 //    }
 
 //    @Test
@@ -101,6 +103,28 @@ public class AppTest
 //        action.release().perform();
 //        sleep(10000);
 //    }
+
+    @Test
+    public void seleniumShoppingTest() throws InterruptedException {
+        driver.manage().window().maximize();
+        driver.get("http://automationpractice.com/index.php");
+        WebElement searchBar = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("search_query_top")));
+        searchBar.sendKeys("shirt");
+        searchBar.submit();
+        sleep(2000);
+        WebElement selectDress = driver.findElement(By.xpath("//*[@id=\"center_column\"]/ul/li/div/div[2]/h5/a"));
+        selectDress.click();
+        WebElement addToCart = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.presenceOfElementLocated((By.xpath("//*[@id=\"add_to_cart\"]/button"))));
+        addToCart.click();
+        sleep(6000);
+        WebElement continueToCart = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.presenceOfElementLocated((By.xpath("//*[@id=\"layer_cart\"]/div[1]/div[2]/div[4]/a"))))  ;
+        continueToCart.click();
+        sleep(4000);
+    }
+
 
     @After
     public void tearDown(){
